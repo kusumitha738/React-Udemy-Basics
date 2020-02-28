@@ -7,14 +7,12 @@ class App extends Component {
 
   state = {
     person: [
-      { id: 0, name: "max", age: 28 },
-      { id: 1, name: "manu", age: 29 },
-      { id: 2, name: "shilpa", age: 30 }
+      {  name: "max", age: 28 },
+      {  name: "manu", age: 29 },
+      {  name: "shilpa", age: 30 }
     ],
-
     showPersons: false
   }
-
 
   switchHandler = () => {
     //console.log("was clicked");
@@ -36,7 +34,6 @@ class App extends Component {
         { name: "shilpa", age: 50 }
       ]
     })
-
   }
 
   toggleParentDiv = () => {
@@ -47,19 +44,34 @@ class App extends Component {
   }
 
   deletePara = (index) => {
-    debugger
-    const { person } = this.state
-   let newData =  person.filter(k => k.id !== index);
-
-    this.setState({
-      person: newData
-    })
-
-    //person.filter()
+    console.log("Index", index)
+    const PersonData = [...this.state.person]
+    PersonData.splice(index, 1);
+    // return PersonData
+    this.setState({ person: PersonData })
+    
   }
 
   render() {
-    const { person, showPersons } = this.state
+    const { person, showPersons } = this.state;
+    console.log("Person", person)
+    const style = {
+      backgroundColor: 'green',
+      color: 'white',
+      font: 'inherit',
+      border: '1px solid black',
+      padding: '8px',
+      cursor: 'pointer'
+    };
+
+    let classes = []; // ========== This is crashing the render ===========
+    // if (person.length <= 2) {
+    //   return classes.push['red'];  // classes = ['red']
+    // }
+    // if (person.length <= 1) {
+    //   return classes.push['blue'] // classes = ['red', 'blue']
+    // }
+
     return (
       // <div className="App">
       //   <header className="App-header">
@@ -71,6 +83,7 @@ class App extends Component {
       // </div>
 
       //========= Rendering content conditionally =========
+
       // <div className="App">
       //   <header className="App-header">
       //     <button onClick={this.toggleParentDiv}>Switch</button>
@@ -86,17 +99,24 @@ class App extends Component {
 
       <div className="App">
         <header className="App-header">
-          <button onClick={this.toggleParentDiv}>Switch</button>
-          {showPersons && <div>
+          <button
+            style={style}
+            onClick={this.toggleParentDiv}>Switch</button>
+          {showPersons && person ? 
+          <div>
             {person.map((newPerson, index) =>
-              <Person click={() => this.deletePara(index)} name={newPerson.name} age={newPerson.age} />
+              <Person click={() => this.deletePara(index)} 
+                key={index} 
+                name={newPerson.name} 
+                age={newPerson.age} />
             )}
-          </div>}
+          </div> : ""
+          }
         </header>
       </div>
     )
+    // style.backgroundColor = 'red' // NOT WORKING // COLOR NOT CHANGING TO RED ON BUTTON CHANGE
   }
-
 }
 
 export default App;
