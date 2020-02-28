@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Person from './Person/Person';
+import Persons from '../components/Persons/Persons';
 
 class App extends Component {
 
@@ -104,12 +103,9 @@ class App extends Component {
             onClick={this.toggleParentDiv}>Switch</button>
           {showPersons && person ? 
           <div>
-            {person.map((newPerson, index) =>
-              <Person click={() => this.deletePara(index)} 
-                key={index} 
-                name={newPerson.name} 
-                age={newPerson.age} />
-            )}
+            <Persons 
+              clicked = {this.deletePara}
+              person = { this.state.person} />
           </div> : ""
           }
         </header>
