@@ -37,11 +37,14 @@
   }
 }
 
-
 .Person {
   width: 50%;
   margin: 16px auto;
   border: 1px solid black;
   padding: 16px;
   background-color: black
+}
+
+.StyleHeading {
+  color: black
 }

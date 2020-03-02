@@ -103,6 +103,7 @@ class App extends Component {
             onClick={this.toggleParentDiv}>Switch</button>
           {showPersons && person ? 
           <div>
+            <h1 className = "StyleHeading">{this.props.appTitle}</h1>
             <Persons 
               clicked = {this.deletePara}
               person = { this.state.person} />
